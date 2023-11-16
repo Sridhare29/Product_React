@@ -15,17 +15,19 @@ function Home() {
   };
 
   useEffect(() => {
-
-
     fetchData();
   }, []);
+
+  function deleteProduct(id) {
+    alert(`Deleting product with ID: ${id}`);
+  }
 
   return (
     <div className='container'>
       <div className='row'>
         {data.map((product) => (
           <div className='col-md-3 mb-4' key={product.id}>
-            <br/>
+            <br />
             <div className='card h-100'>
               <img
                 src={product.productImageUrl}
@@ -37,7 +39,14 @@ function Home() {
                 <h5 className='card-title'>{product.name}</h5>
                 <p className='card-text text-secondary'>{product.description}</p>
                 <h6 className='card-text'>₹{product.price}</h6>
-                <p className='card-text text-secondary'><b>{product.category.name}</b></p>
+                <p className='card-text text-secondary'>
+                  <b>{product.category.name}</b>
+                </p>
+
+                <div>
+                  <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                  <button>Edit</button>
+                </div>
               </div>
             </div>
           </div>
