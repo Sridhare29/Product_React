@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaTrash } from 'react-icons/fa';
 
 function Home() {
   const [data, setData] = useState([]);
@@ -19,7 +20,7 @@ function Home() {
   }, []);
 
   async function deleteProduct(id) {
-    let result = await fetch("https://localhost:7014/api/Product/Delete/"+id,{
+    let result = await fetch("https://localhost:7014/api/Product/Delete/" + id, {
       method: 'DELETE'
     });
     result = await result.json();
@@ -50,8 +51,9 @@ function Home() {
                 </p>
 
                 <div>
-                  <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                  <button>Edit</button>
+                  <button className="delete-button" onClick={() => deleteProduct(product.id)}>
+                    <FaTrash />    Delete
+                  </button>            
                 </div>
               </div>
             </div>

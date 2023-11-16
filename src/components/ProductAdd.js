@@ -15,19 +15,23 @@ function ProductAdd() {
     formData.append('description', description);
     formData.append('price', price);
     formData.append('categoryId', categoryId);
-
+    const data = {
+      name,
+      productImageUrl,
+      description,
+      price,
+      categoryId,
+    };
+  
+    console.warn("products :" ,name,price,description,categoryId,productImageUrl)
     try {
       let response = await fetch("https://localhost:7014/api/Product/Create", {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       });
-
-      if (response.ok) {
-        alert("Data is Saved!");
-      } else {
-        alert("Error saving data. Please check the console for details.");
-        console.error('Error:', response.statusText);
-      }
     } catch (error) {
       alert("An error occurred. Please check the console for details.");
       console.error('Error:', error);
@@ -38,7 +42,7 @@ function ProductAdd() {
   return (
     <div className="container mt-5">
       <h1>Add Product</h1>
-      <form onSubmit={addProduct} >
+      <form >
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Name:
@@ -60,7 +64,6 @@ function ProductAdd() {
             className="form-control"
             id="productImageUrl"
             name="productImageUrl"
-            // value={product.productImageUrl}
             onChange={(e) => setProductImageUrl(e.target.value)}
             />
         </div>
@@ -72,7 +75,6 @@ function ProductAdd() {
             className="form-control"
             id="description"
             name="description"
-            // value={product.description}
             onChange={(e) => setDescription(e.target.value)}
             />
         </div>
@@ -85,7 +87,6 @@ function ProductAdd() {
             className="form-control"
             id="price"
             name="price"
-            // value={product.price}
             onChange={(e) => setPrice(e.target.value)}
             />
         </div>
@@ -98,11 +99,10 @@ function ProductAdd() {
             className="form-control"
             id="category"
             name="categoryId"
-            // value={product.categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
             />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" onClick={addProduct} className="btn btn-primary">
           Add Product
         </button>
       </form>

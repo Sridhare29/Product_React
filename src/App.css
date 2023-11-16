@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+.delete-button {
+  background-color: #dc3545; 
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.delete-button:hover {
+  background-color: #c82333; 
+}
+
+.delete-button svg {
+  margin-right: 0.5rem; 
+}
+
+.delete-text {
+  margin-left: 0.5rem;
+
+}
