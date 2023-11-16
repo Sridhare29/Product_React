@@ -18,8 +18,14 @@ function Home() {
     fetchData();
   }, []);
 
-  function deleteProduct(id) {
-    alert(`Deleting product with ID: ${id}`);
+  async function deleteProduct(id) {
+    let result = await fetch("https://localhost:7014/api/Product/Delete/"+id,{
+      method: 'DELETE'
+    });
+    result = await result.json();
+    console.warn(result);
+    alert("Product as been Deleted");
+    fetchData();
   }
 
   return (
